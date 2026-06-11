@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Działalność Nierejestrowana w Polsce</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+    --bg:#f8fafc;
+    --white:#ffffff;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --shadow:0 10px 30px rgba(15,23,42,.08);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+}
+
+.container{
+    width:min(1200px,90%);
+    margin:auto;
+}
+
+section{
+    padding:90px 0;
+}
+
+h1,h2,h3{
+    line-height:1.2;
+}
+
+h2{
+    text-align:center;
+    font-size:clamp(2rem,4vw,2.8rem);
+    margin-bottom:18px;
+}
+
+.section-subtitle{
+    text-align:center;
+    color:var(--muted);
+    max-width:760px;
+    margin:0 auto 50px;
+}
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(226,232,240,.8);
+}
+
+.nav-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:75px;
+}
+
+.logo{
+    font-size:1.2rem;
+    font-weight:800;
+    color:var(--primary);
+}
+
+.nav-links{
+    display:flex;
+    gap:24px;
+    list-style:none;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--primary);
+}
+
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    background:
+    radial-gradient(circle at top right, rgba(37,99,235,.12), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(37,99,235,.08), transparent 35%);
+}
+
+.hero-content{
+    text-align:center;
+    max-width:850px;
+    margin:auto;
+}
+
+.hero h1{
+    font-size:clamp(2.7rem,6vw,5rem);
+    margin-bottom:20px;
+    font-weight:800;
+}
+
+.hero p{
+    font-size:1.15rem;
+    color:var(--muted);
+    margin-bottom:35px;
+}
+
+.btn{
+    display:inline-block;
+    background:var(--primary);
+    color:#fff;
+    text-decoration:none;
+    padding:15px 28px;
+    border-radius:999px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:var(--primary-dark);
+    transform:translateY(-2px);
+}
+
+.grid{
+    display:grid;
+    gap:24px;
+}
+
+.cards-3{
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+
+.cards-2{
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+}
+
+.card{
+    background:var(--white);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card i{
+    font-size:1.7rem;
+    color:var(--primary);
+    margin-bottom:15px;
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.list{
+    list-style:none;
+}
+
+.list li{
+    margin-bottom:14px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+}
+
+.list i{
+    margin-top:5px;
+}
+
+.pros{
+    border-top:4px solid #16a34a;
+}
+
+.cons{
+    border-top:4px solid #dc2626;
+}
+
+.pros i{
+    color:#16a34a;
+}
+
+.cons i{
+    color:#dc2626;
+}
+
+.faq{
+    max-width:900px;
+    margin:auto;
+}
+
+.faq-item{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:14px;
+    margin-bottom:16px;
+    overflow:hidden;
+}
+
+.faq-question{
+    width:100%;
+    border:none;
+    background:none;
+    text-align:left;
+    padding:22px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    color:var(--muted);
+}
+
+.faq-answer p{
+    padding:0 22px 22px;
+}
+
+.faq-item.active .faq-answer{
+    max-height:250px;
+}
+
+.faq-item.active .faq-question i{
+    transform:rotate(180deg);
+}
+
+.faq-question i{
+    transition:.3s;
+}
+
+.footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:35px 20px;
+}
+
+.fade{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all .8s ease;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:900px){
+    .nav-content{
+        flex-direction:column;
+        height:auto;
+        padding:15px 0;
+        gap:15px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:14px;
+    }
+
+    section{
+        padding:70px 0;
+    }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">Działalność Nierejestrowana</div>
+
+        <ul class="nav-links">
+            <li><a href="#czym-jest">Czym jest</a></li>
+            <li><a href="#warunki">Warunki</a></li>
+            <li><a href="#zalety">Zalety i wady</a></li>
+            <li><a href="#obowiazki">Obowiązki</a></li>
+            <li><a href="#dla-kogo">Dla kogo</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content fade">
+            <h1>Działalność nierejestrowana w Polsce</h1>
+            <p>
+                Legalny sposób na rozpoczęcie sprzedaży produktów lub usług bez rejestracji firmy w CEIDG.
+                Idealne rozwiązanie dla osób testujących pomysł biznesowy lub dorabiających okazjonalnie.
+            </p>
+            <a href="#czym-jest" class="btn">Dowiedz się więcej</a>
+        </div>
+    </div>
+</section>
+
+<section id="czym-jest">
+    <div class="container">
+        <h2 class="fade">Czym jest działalność nierejestrowana?</h2>
+        <p class="section-subtitle fade">
+            Działalność nierejestrowana pozwala osobom fizycznym prowadzić drobną działalność zarobkową
+            bez zakładania firmy i bez wpisu do CEIDG, o ile spełnione są określone warunki ustawowe.
+        </p>
+
+        <div class="grid cards-3">
+            <div class="card fade">
+                <i class="fa-solid fa-user-check"></i>
+                <h3>Bez rejestracji firmy</h3>
+                <p>Nie ma obowiązku wpisu do CEIDG ani zakładania działalności gospodarczej.</p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-file-invoice"></i>
+                <h3>Prostsze formalności</h3>
+                <p>Ograniczone obowiązki administracyjne i uproszczone rozliczenia.</p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-lightbulb"></i>
+                <h3>Testowanie pomysłu</h3>
+                <p>Dobry sposób na sprawdzenie zainteresowania usługą lub produktem przed założeniem firmy.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="warunki">
+    <div class="container">
+        <h2 class="fade">Warunki prowadzenia</h2>
+        <p class="section-subtitle fade">
+            Aby korzystać z działalności nierejestrowanej, należy spełniać określone wymagania.
+        </p>
+
+        <div class="grid cards-3">
+            <div class="card fade">
+                <i class="fa-solid fa-coins"></i>
+                <h3>Limit przychodu</h3>
+                <p>
+                    Miesięczny przychód nie może przekroczyć 75% minimalnego wynagrodzenia obowiązującego
+                    w danym roku.
+                </p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-ban"></i>
+                <h3>Brak działalności gospodarczej</h3>
+                <p>
+                    Nie można prowadzić działalności wymagającej koncesji, zezwoleń lub szczególnych regulacji.
+                </p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-building-circle-check"></i>
+                <h3>Brak wpisu do CEIDG</h3>
+                <p>
+                    Osoba prowadząca działalność nierejestrowaną nie figuruje jako przedsiębiorca w CEIDG.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="zalety">
+    <div class="container">
+        <h2 class="fade">Zalety i wady</h2>
+        <p class="section-subtitle fade">
+            Rozwiązanie wygodne na start, ale posiada również pewne ograniczenia.
+        </p>
+
+        <div class="grid cards-2">
+            <div class="card pros fade">
+                <h3>Zalety</h3>
+                <ul class="list">
+                    <li><i class="fa-solid fa-check"></i><span>Brak obowiązku rejestracji firmy.</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>Mniej formalności i kosztów początkowych.</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>Możliwość legalnego testowania rynku.</span></li>
+                    <li><i class="fa-solid fa-check"></i><span>Brak składek ZUS z tytułu tej działalności.</span></li>
+                </ul>
+            </div>
+
+            <div class="card cons fade">
+                <h3>Wady</h3>
+                <ul class="list">
+                    <li><i class="fa-solid fa-xmark"></i><span>Ograniczenie miesięcznego przychodu.</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>Nie każda działalność może być prowadzona w tej formie.</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>Konieczność monitorowania limitów.</span></li>
+                    <li><i class="fa-solid fa-xmark"></i><span>Przekroczenie limitu oznacza obowiązek rejestracji działalności.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="obowiazki">
+    <div class="container">
+        <h2 class="fade">Obowiązki</h2>
+        <p class="section-subtitle fade">
+            Mimo uproszczeń, osoba prowadząca działalność nierejestrowaną ma określone obowiązki.
+        </p>
+
+        <div class="grid cards-3">
+            <div class="card fade">
+                <i class="fa-solid fa-book"></i>
+                <h3>Ewidencja sprzedaży</h3>
+                <p>Warto prowadzić uproszczoną ewidencję przychodów, aby kontrolować limit.</p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-receipt"></i>
+                <h3>Dokumentowanie sprzedaży</h3>
+                <p>Na żądanie klienta należy wystawić rachunek lub odpowiedni dokument sprzedaży.</p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-calculator"></i>
+                <h3>Rozliczenie podatku</h3>
+                <p>Przychody należy wykazać w rocznym zeznaniu podatkowym zgodnie z obowiązującymi przepisami.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="dla-kogo">
+    <div class="container">
+        <h2 class="fade">Dla kogo?</h2>
+        <p class="section-subtitle fade">
+            Ta forma działalności jest szczególnie atrakcyjna dla osób rozpoczynających swoją przygodę z biznesem.
+        </p>
+
+        <div class="grid cards-3">
+            <div class="card fade">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>Studenci</h3>
+                <p>Sprzedaż usług, korepetycji lub produktów bez konieczności zakładania firmy.</p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-laptop"></i>
+                <h3>Freelancerzy</h3>
+                <p>Testowanie współpracy z klientami przed przejściem na pełną działalność gospodarczą.</p>
+            </div>
+
+            <div class="card fade">
+                <i class="fa-solid fa-store"></i>
+                <h3>Twórcy i hobbyści</h3>
+                <p>Sprzedaż rękodzieła, grafik, dekoracji czy innych produktów wykonywanych okazjonalnie.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq">
+    <div class="container">
+        <h2 class="fade">Najczęściej zadawane pytania</h2>
+        <p class="section-subtitle fade">
+            Krótkie odpowiedzi na najpopularniejsze pytania dotyczące działalności nierejestrowanej.
+        </p>
+
+        <div class="faq">
+            <div class="faq-item fade">
+                <button class="faq-question">
+                    Czy muszę rejestrować firmę?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Nie, jeśli spełniasz warunki działalności nierejestrowanej i nie przekraczasz ustawowego limitu przychodu.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade">
+                <button class="faq-question">
+                    Czy potrzebuję wpisu do CEIDG?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Nie. Działalność nierejestrowana jest prowadzona bez wpisu do CEIDG.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade">
+                <button class="faq-question">
+                    Co jeśli przekroczę limit przychodu?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Po przekroczeniu limitu powstaje obowiązek rejestracji działalności gospodarczej zgodnie z obowiązującymi przepisami.</p>
+                </div>
+            </div>
+
+            <div class="faq-item fade">
+                <button class="faq-question">
+                    Czy mogę wystawiać rachunki klientom?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Tak. Na żądanie klienta należy wystawić odpowiedni dokument potwierdzający sprzedaż.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© 2026 Działalność Nierejestrowana w Polsce. Strona informacyjna.</p>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(button=>{
+    button.addEventListener('click',()=>{
+        const item=button.parentElement;
+        item.classList.toggle('active');
+    });
+});
+
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add('show');
+        }
+    });
+},{threshold:0.15});
+
+document.querySelectorAll('.fade').forEach(el=>{
+    observer.observe(el);
+});
+</script>
+
+</body>
+</html>
